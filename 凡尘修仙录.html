@@ -1,0 +1,2258 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>凡尘修仙录</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#8B5CF6', // 紫色主色调，代表神秘与修仙
+                        secondary: '#EC4899', // 粉色辅助色
+                        accent: '#F59E0B', // 金色强调色，代表灵气与宝物
+                        dark: '#1E293B',
+                        light: '#F8FAFC',
+                        rarity: {
+                            common: '#9CA3AF',    // 凡品 - 灰色
+                            uncommon: '#10B981',  // 下品 - 绿色
+                            rare: '#3B82F6',      // 中品 - 蓝色
+                            epic: '#8B5CF6',      // 上品 - 紫色
+                            legendary: '#F59E0B'  // 极品 - 金色
+                        }
+                    },
+                    fontFamily: {
+                        xianxia: ['"Ma Shan Zheng"', '"Noto Serif SC"', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .text-shadow-lg {
+                text-shadow: 0 4px 8px rgba(0,0,0,0.12), 0 2px 4px rgba(0,0,0,0.08);
+            }
+            .bg-pattern {
+                background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM34 90c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm56-76c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zM12 86c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm28-65c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm23-11c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-6 60c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm29 22c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zM32 63c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm57-13c2.76 0 5-2.24 5-5s-2.24-5-5-5-5 2.24-5 5 2.24 5 5 5zm-9-21c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM60 91c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM35 41c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2zM12 60c1.105 0 2-.895 2-2s-.895-2-2-2-2 .895-2 2 .895 2 2 2z' fill='%239C92AC' fill-opacity='0.05' fill-rule='evenodd'/%3E%3C/svg%3E");
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+            .animate-pulse-slow {
+                animation: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+            }
+            .animate-float {
+                animation: float 6s ease-in-out infinite;
+            }
+            .animate-glow {
+                animation: glow 2s ease-in-out infinite alternate;
+            }
+            @keyframes float {
+                0% { transform: translateY(0px); }
+                50% { transform: translateY(-10px); }
+                100% { transform: translateY(0px); }
+            }
+            @keyframes glow {
+                from { box-shadow: 0 0 5px rgba(139, 92, 246, 0.5); }
+                to { box-shadow: 0 0 20px rgba(139, 92, 246, 0.8); }
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-gray-900 text-light bg-pattern min-h-screen">
+    <!-- 顶部导航 -->
+    <header class="bg-dark/80 backdrop-blur-md border-b border-primary/30 sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fa fa-diamond text-accent text-2xl animate-pulse-slow"></i>
+                <h1 class="text-2xl md:text-3xl font-xianxia text-accent">凡尘修仙录</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:flex items-center space-x-1 text-gray-300">
+                    <i class="fa fa-diamond text-accent"></i>
+                    <span id="spirit-stones" class="font-bold">100</span>
+                </div>
+                <button id="sound-toggle" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-volume-up text-gray-300"></i>
+                </button>
+                <button id="settings-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-cog text-gray-300"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="container mx-auto px-4 py-6">
+        <!-- 角色信息卡片 -->
+        <section class="mb-6">
+            <div class="bg-gradient-to-br from-dark to-gray-800 rounded-xl border border-primary/30 shadow-lg overflow-hidden">
+                <div class="relative">
+                    <div class="h-24 bg-gradient-to-r from-primary/30 to-secondary/30"></div>
+                    <div class="absolute -bottom-12 left-6">
+                        <div class="w-24 h-24 rounded-full bg-dark border-4 border-primary flex items-center justify-center overflow-hidden animate-float">
+                            <i class="fa fa-user-circle-o text-5xl text-accent"></i>
+                        </div>
+                    </div>
+                </div>
+                <div class="pt-16 pb-4 px-6">
+                    <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+                        <div>
+                            <h2 class="text-2xl font-xianxia text-white" id="player-name">无名修士</h2>
+                            <div class="flex items-center mt-1">
+                                <span class="bg-primary/20 text-primary px-3 py-1 rounded-full text-sm font-medium" id="player-realm">炼气一层</span>
+                                <span class="ml-3 text-gray-400 text-sm">等级 <span id="player-level" class="text-accent font-bold">1</span></span>
+                            </div>
+                        </div>
+                        <div class="mt-4 md:mt-0 flex space-x-3">
+                            <button id="start-auto-btn" class="bg-accent hover:bg-accent/80 text-dark px-5 py-2 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center">
+                                <i class="fa fa-play mr-2"></i>开始挂机
+                            </button>
+                            <button id="stop-auto-btn" class="bg-gray-700 hover:bg-gray-600 text-white px-5 py-2 rounded-lg font-bold transition-all transform hover:scale-105 flex items-center hidden">
+                                <i class="fa fa-stop mr-2"></i>停止挂机
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <!-- 进度条 -->
+                    <div class="mt-6 space-y-3">
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">修为</span>
+                            <span class="text-accent" id="cultivation-progress-text">100/1000</span>
+                        </div>
+                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div id="cultivation-progress" class="h-full bg-gradient-to-r from-primary to-secondary" style="width: 10%"></div>
+                        </div>
+                        
+                        <div class="flex justify-between text-sm">
+                            <span class="text-gray-400">生命值</span>
+                            <span class="text-green-400" id="hp-text">100/100</span>
+                        </div>
+                        <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                            <div id="hp-progress" class="h-full bg-green-500" style="width: 100%"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 主要内容区域 -->
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- 左侧：战斗日志 -->
+            <div class="lg:col-span-2">
+                <div class="bg-dark rounded-xl border border-primary/30 shadow-lg overflow-hidden h-full">
+                    <div class="p-4 border-b border-primary/20 flex justify-between items-center">
+                        <h3 class="font-xianxia text-xl text-white">修炼日志</h3>
+                        <button id="clear-log-btn" class="text-gray-400 hover:text-white text-sm transition-colors">
+                            <i class="fa fa-trash-o mr-1"></i>清空
+                        </button>
+                    </div>
+                    <div id="battle-log" class="p-4 h-[400px] overflow-y-auto scrollbar-hide space-y-2 text-gray-300 text-sm">
+                        <div class="animate-pulse">等待开始修炼...</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 右侧：功能菜单 -->
+            <div class="space-y-6">
+                <!-- 快捷属性 -->
+                <div class="bg-dark rounded-xl border border-primary/30 shadow-lg overflow-hidden">
+                    <div class="p-4 border-b border-primary/20">
+                        <h3 class="font-xianxia text-xl text-white">修士属性</h3>
+                    </div>
+                    <div class="p-4 grid grid-cols-2 gap-3">
+                        <div class="bg-gray-800 rounded-lg p-3 text-center">
+                            <div class="text-gray-400 text-xs">攻击</div>
+                            <div class="text-accent font-bold text-xl" id="attack">10</div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 text-center">
+                            <div class="text-gray-400 text-xs">防御</div>
+                            <div class="text-accent font-bold text-xl" id="defense">5</div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 text-center">
+                            <div class="text-gray-400 text-xs">灵力</div>
+                            <div class="text-accent font-bold text-xl" id="spirit">8</div>
+                        </div>
+                        <div class="bg-gray-800 rounded-lg p-3 text-center">
+                            <div class="text-gray-400 text-xs">身法</div>
+                            <div class="text-accent font-bold text-xl" id="agility">3</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 功能按钮 -->
+                <div class="grid grid-cols-2 gap-3">
+                    <button id="backpack-btn" class="bg-gradient-to-br from-gray-800 to-dark hover:from-gray-700 hover:to-gray-800 border border-primary/30 rounded-xl p-4 flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                        <i class="fa fa-briefcase text-2xl text-accent mb-2"></i>
+                        <span class="font-medium">背包</span>
+                        <span id="backpack-count" class="text-xs bg-primary/20 text-primary rounded-full px-2 py-0.5 mt-1">0/20</span>
+                    </button>
+                    <button id="equipment-btn" class="bg-gradient-to-br from-gray-800 to-dark hover:from-gray-700 hover:to-gray-800 border border-primary/30 rounded-xl p-4 flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                        <i class="fa fa-shield text-2xl text-accent mb-2"></i>
+                        <span class="font-medium">装备</span>
+                    </button>
+                    <button id="shop-btn" class="bg-gradient-to-br from-gray-800 to-dark hover:from-gray-700 hover:to-gray-800 border border-primary/30 rounded-xl p-4 flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                        <i class="fa fa-shopping-cart text-2xl text-accent mb-2"></i>
+                        <span class="font-medium">商店</span>
+                    </button>
+                    <button id="skills-btn" class="bg-gradient-to-br from-gray-800 to-dark hover:from-gray-700 hover:to-gray-800 border border-primary/30 rounded-xl p-4 flex flex-col items-center justify-center transition-all transform hover:scale-105">
+                        <i class="fa fa-fire text-2xl text-accent mb-2"></i>
+                        <span class="font-medium">技能</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- 背包弹窗 -->
+    <div id="backpack-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-dark border border-primary/30 rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b border-primary/20 flex justify-between items-center">
+                <h3 class="font-xianxia text-xl text-white">背包</h3>
+                <div class="flex space-x-2">
+                    <div class="relative">
+                        <input type="text" id="backpack-search" placeholder="搜索物品..." class="bg-gray-800 border border-gray-700 rounded-lg px-3 py-1.5 text-sm w-40 focus:outline-none focus:border-primary">
+                        <i class="fa fa-search absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm"></i>
+                    </div>
+                    <button id="close-backpack-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                        <i class="fa fa-times text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 背包分类 -->
+            <div class="border-b border-primary/20 flex overflow-x-auto scrollbar-hide">
+                <button class="backpack-category px-4 py-2 whitespace-nowrap text-accent border-b-2 border-accent" data-category="all">全部</button>
+                <button class="backpack-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="potion">丹药</button>
+                <button class="backpack-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="material">材料</button>
+                <button class="backpack-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="weapon">武器</button>
+                <button class="backpack-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="armor">防具</button>
+                <button class="backpack-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="accessory">饰品</button>
+                <button class="backpack-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="skill">秘籍</button>
+            </div>
+            
+            <!-- 背包内容 -->
+            <div id="backpack-content" class="flex-1 p-4 overflow-y-auto scrollbar-hide grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3">
+                <!-- 背包物品会通过JS动态生成 -->
+                <div class="text-gray-500 flex flex-col items-center justify-center p-6 border border-dashed border-gray-700 rounded-lg col-span-full">
+                    <i class="fa fa-inbox text-3xl mb-2"></i>
+                    <span>背包为空</span>
+                </div>
+            </div>
+            
+            <div class="p-4 border-t border-primary/20 text-sm text-gray-500 flex justify-between">
+                <span>容量: <span id="backpack-capacity">0/20</span></span>
+                <button id="expand-backpack-btn" class="text-accent hover:underline">扩充背包 (50灵石)</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 装备弹窗 -->
+    <div id="equipment-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-dark border border-primary/30 rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b border-primary/20 flex justify-between items-center">
+                <h3 class="font-xianxia text-xl text-white">装备</h3>
+                <button id="close-equipment-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-times text-gray-300"></i>
+                </button>
+            </div>
+            
+            <!-- 装备槽 -->
+            <div class="flex-1 p-4 overflow-y-auto scrollbar-hide">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                        <h4 class="text-gray-400 text-sm mb-2">武器</h4>
+                        <div id="weapon-slot" class="h-24 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center text-gray-500">
+                            <i class="fa fa-sword text-3xl mr-2"></i>
+                            <span>未装备</span>
+                        </div>
+                        <button class="equip-unequip-btn mt-2 text-xs text-primary hover:text-primary/80 hidden" data-slot="weapon">
+                            卸下装备
+                        </button>
+                        <button class="enhance-equipment-btn mt-2 text-xs text-accent hover:text-accent/80 hidden" data-slot="weapon">
+                            强化装备
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                        <h4 class="text-gray-400 text-sm mb-2">防具</h4>
+                        <div id="armor-slot" class="h-24 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center text-gray-500">
+                            <i class="fa fa-shield text-3xl mr-2"></i>
+                            <span>未装备</span>
+                        </div>
+                        <button class="equip-unequip-btn mt-2 text-xs text-primary hover:text-primary/80 hidden" data-slot="armor">
+                            卸下装备
+                        </button>
+                        <button class="enhance-equipment-btn mt-2 text-xs text-accent hover:text-accent/80 hidden" data-slot="armor">
+                            强化装备
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                        <h4 class="text-gray-400 text-sm mb-2">饰品</h4>
+                        <div id="accessory-slot" class="h-24 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center text-gray-500">
+                            <i class="fa fa-gem text-3xl mr-2"></i>
+                            <span>未装备</span>
+                        </div>
+                        <button class="equip-unequip-btn mt-2 text-xs text-primary hover:text-primary/80 hidden" data-slot="accessory">
+                            卸下装备
+                        </button>
+                        <button class="enhance-equipment-btn mt-2 text-xs text-accent hover:text-accent/80 hidden" data-slot="accessory">
+                            强化装备
+                        </button>
+                    </div>
+                    
+                    <div class="bg-gray-800 rounded-lg p-4 border border-gray-700">
+                        <h4 class="text-gray-400 text-sm mb-2">法宝</h4>
+                        <div id="treasure-slot" class="h-24 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center text-gray-500">
+                            <i class="fa fa-magic text-3xl mr-2"></i>
+                            <span>未解锁</span>
+                        </div>
+                        <div class="mt-2 text-xs text-gray-500" id="treasure-unlock-condition">
+                            解锁条件: 达到筑基期
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 装备强化 -->
+                <div class="mt-6 bg-gray-800 rounded-lg p-4 border border-gray-700">
+                    <h4 class="text-gray-400 text-sm mb-3">装备强化</h4>
+                    <div id="enhancement-area" class="text-gray-500 text-sm text-center py-4 border border-dashed border-gray-700 rounded-lg">
+                        选择一件已装备的物品进行强化
+                    </div>
+                </div>
+                
+                <!-- 已装备属性 -->
+                <div class="mt-6 bg-gray-800 rounded-lg p-4 border border-gray-700">
+                    <h4 class="text-gray-400 text-sm mb-2">装备属性总和</h4>
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-sm">
+                        <div class="flex items-center">
+                            <i class="fa fa-bolt mr-1 text-red-400"></i>
+                            <span>攻击: <span id="total-attack" class="text-accent">0</span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-shield mr-1 text-blue-400"></i>
+                            <span>防御: <span id="total-defense" class="text-accent">0</span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-magic mr-1 text-purple-400"></i>
+                            <span>灵力: <span id="total-spirit" class="text-accent">0</span></span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fa fa-wind mr-1 text-green-400"></i>
+                            <span>身法: <span id="total-agility" class="text-accent">0</span></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 商店弹窗 -->
+    <div id="shop-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-dark border border-primary/30 rounded-xl w-full max-w-2xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b border-primary/20 flex justify-between items-center">
+                <h3 class="font-xianxia text-xl text-white">修仙商店</h3>
+                <div class="flex items-center">
+                    <i class="fa fa-diamond text-accent mr-1"></i>
+                    <span id="shop-spirit-stones" class="mr-4">100</span>
+                    <button id="close-shop-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                        <i class="fa fa-times text-gray-300"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 商店分类 -->
+            <div class="border-b border-primary/20 flex overflow-x-auto scrollbar-hide">
+                <button class="shop-category px-4 py-2 whitespace-nowrap text-accent border-b-2 border-accent" data-category="potion">丹药</button>
+                <button class="shop-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="weapon">武器</button>
+                <button class="shop-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="armor">防具</button>
+                <button class="shop-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="accessory">饰品</button>
+                <button class="shop-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="material">材料</button>
+                <button class="shop-category px-4 py-2 whitespace-nowrap text-gray-400 hover:text-white" data-category="skill">秘籍</button>
+            </div>
+            
+            <!-- 商店内容 -->
+            <div id="shop-content" class="flex-1 p-4 overflow-y-auto scrollbar-hide space-y-3">
+                <!-- 商品项会通过JS动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 技能弹窗 -->
+    <div id="skills-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-dark border border-primary/30 rounded-xl w-full max-w-xl max-h-[90vh] flex flex-col">
+            <div class="p-4 border-b border-primary/20 flex justify-between items-center">
+                <h3 class="font-xianxia text-xl text-white">修仙技能</h3>
+                <button id="close-skills-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-times text-gray-300"></i>
+                </button>
+            </div>
+            
+            <!-- 技能筛选 -->
+            <div class="border-b border-primary/20 p-2 flex justify-between items-center">
+                <div class="flex space-x-2">
+                    <button class="skill-filter px-3 py-1 text-sm rounded-full bg-primary/20 text-primary" data-filter="all">全部</button>
+                    <button class="skill-filter px-3 py-1 text-sm rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600" data-filter="unlocked">已解锁</button>
+                    <button class="skill-filter px-3 py-1 text-sm rounded-full bg-gray-700 text-gray-300 hover:bg-gray-600" data-filter="locked">未解锁</button>
+                </div>
+                <button id="auto-cast-btn" class="text-sm text-accent hover:text-accent/80 flex items-center">
+                    <i class="fa fa-magic mr-1"></i> 自动释放: <span id="auto-cast-status">关闭</span>
+                </button>
+            </div>
+            
+            <!-- 技能内容 -->
+            <div id="skills-content" class="flex-1 p-4 overflow-y-auto scrollbar-hide space-y-4">
+                <!-- 技能会通过JS动态生成 -->
+            </div>
+        </div>
+    </div>
+
+    <!-- 物品详情弹窗 -->
+    <div id="item-detail-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-dark border border-primary/30 rounded-xl w-full max-w-sm p-5">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="font-xianxia text-xl text-white" id="item-detail-name">下品聚气丹</h3>
+                <button id="close-item-detail-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-times text-gray-300"></i>
+                </button>
+            </div>
+            
+            <div class="flex items-center mb-4">
+                <div id="item-detail-icon" class="w-16 h-16 bg-green-900/30 rounded-lg flex items-center justify-center mr-4">
+                    <i class="fa fa-flask text-green-400 text-2xl"></i>
+                </div>
+                <div>
+                    <div id="item-detail-rarity" class="text-xs bg-green-900/30 text-green-400 px-2 py-0.5 rounded-full">下品</div>
+                    <div class="text-sm text-gray-400 mt-1">数量: <span id="item-detail-count">3</span></div>
+                    <div class="text-sm text-gray-400 mt-1">类型: <span id="item-detail-type">丹药</span></div>
+                </div>
+            </div>
+            
+            <div class="mb-4">
+                <h4 class="text-sm font-medium text-gray-300 mb-1">物品描述</h4>
+                <p class="text-sm text-gray-400" id="item-detail-desc">普通的聚气丹药，服用后可增加100点修为，有助于突破境界。</p>
+            </div>
+            
+            <!-- 物品效果 -->
+            <div class="mb-4 p-3 bg-gray-800 rounded-lg">
+                <h4 class="text-sm font-medium text-gray-300 mb-2">物品效果</h4>
+                <div id="item-detail-effects" class="space-y-1 text-sm">
+                    <div class="flex items-center text-green-400">
+                        <i class="fa fa-arrow-up mr-1"></i> 修为 +100
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-2">
+                <button id="use-item-btn" class="w-full bg-accent hover:bg-accent/80 text-dark py-2 rounded-lg font-bold transition-colors">
+                    使用
+                </button>
+                <button id="sell-item-btn" class="w-full bg-gray-700 hover:bg-gray-600 text-white py-2 rounded-lg font-bold transition-colors">
+                    出售 (5灵石)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 装备强化弹窗 -->
+    <div id="enhancement-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-dark border border-primary/30 rounded-xl w-full max-w-sm p-5">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="font-xianxia text-xl text-white">装备强化</h3>
+                <button id="close-enhancement-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-times text-gray-300"></i>
+                </button>
+            </div>
+            
+            <div id="enhancement-item-info" class="mb-4">
+                <div class="flex items-center">
+                    <div id="enhancement-item-icon" class="w-12 h-12 bg-purple-900/30 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fa fa-sword text-purple-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <div id="enhancement-item-name" class="font-medium">铁剑</div>
+                        <div class="text-xs text-gray-400">当前等级: <span id="enhancement-item-level" class="text-accent">1</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 强化消耗 -->
+            <div class="mb-4 p-3 bg-gray-800 rounded-lg">
+                <h4 class="text-sm font-medium text-gray-300 mb-2">强化消耗</h4>
+                <div class="flex items-center text-gray-300 mb-2">
+                    <i class="fa fa-diamond text-accent mr-2"></i>
+                    <span>灵石: <span id="enhancement-stone-cost">50</span></span>
+                </div>
+                <div id="enhancement-material-cost" class="flex items-center text-gray-300">
+                    <i class="fa fa-cube text-blue-400 mr-2"></i>
+                    <span>强化石: <span id="enhancement-material-count">1</span></span>
+                </div>
+            </div>
+            
+            <!-- 强化成功率 -->
+            <div class="mb-4">
+                <div class="flex justify-between text-sm mb-1">
+                    <span>成功率</span>
+                    <span id="enhancement-success-rate" class="text-green-400">80%</span>
+                </div>
+                <div class="h-2 bg-gray-700 rounded-full overflow-hidden">
+                    <div id="enhancement-success-bar" class="h-full bg-green-500" style="width: 80%"></div>
+                </div>
+                <div class="text-xs text-gray-500 mt-1">
+                    失败不会降级，但会消耗材料
+                </div>
+            </div>
+            
+            <button id="confirm-enhancement-btn" class="w-full bg-accent hover:bg-accent/80 text-dark py-2 rounded-lg font-bold transition-colors">
+                确认强化
+            </button>
+        </div>
+    </div>
+
+    <!-- 技能升级弹窗 -->
+    <div id="skill-upgrade-modal" class="fixed inset-0 bg-black/70 z-50 flex items-center justify-center hidden">
+        <div class="bg-dark border border-primary/30 rounded-xl w-full max-w-sm p-5">
+            <div class="flex justify-between items-start mb-4">
+                <h3 class="font-xianxia text-xl text-white">技能升级</h3>
+                <button id="close-skill-upgrade-btn" class="p-2 rounded-full hover:bg-primary/20 transition-colors">
+                    <i class="fa fa-times text-gray-300"></i>
+                </button>
+            </div>
+            
+            <div id="skill-upgrade-info" class="mb-4">
+                <div class="flex items-center">
+                    <div id="skill-upgrade-icon" class="w-12 h-12 bg-red-900/30 rounded-lg flex items-center justify-center mr-3">
+                        <i class="fa fa-fire text-red-400 text-xl"></i>
+                    </div>
+                    <div>
+                        <div id="skill-upgrade-name" class="font-medium">火球术</div>
+                        <div class="text-xs text-gray-400">等级: <span id="skill-current-level" class="text-accent">1</span> → <span id="skill-next-level" class="text-accent">2</span></div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 升级效果 -->
+            <div class="mb-4 p-3 bg-gray-800 rounded-lg">
+                <h4 class="text-sm font-medium text-gray-300 mb-2">升级效果</h4>
+                <div class="space-y-1 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-gray-400">伤害倍率:</span>
+                        <span class="text-red-400"><span id="skill-current-effect">150%</span> → <span id="skill-next-effect">160%</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 升级消耗 -->
+            <div class="mb-4 p-3 bg-gray-800 rounded-lg">
+                <h4 class="text-sm font-medium text-gray-300 mb-2">升级消耗</h4>
+                <div class="flex items-center text-gray-300 mb-2">
+                    <i class="fa fa-diamond text-accent mr-2"></i>
+                    <span>灵石: <span id="skill-upgrade-stone-cost">100</span></span>
+                </div>
+                <div class="flex items-center text-gray-300">
+                    <i class="fa fa-book text-yellow-400 mr-2"></i>
+                    <span>技能点: <span id="skill-upgrade-point-cost">1</span></span>
+                </div>
+            </div>
+            
+            <button id="confirm-skill-upgrade-btn" class="w-full bg-accent hover:bg-accent/80 text-dark py-2 rounded-lg font-bold transition-colors">
+                确认升级
+            </button>
+        </div>
+    </div>
+
+    <footer class="mt-10 py-6 border-t border-primary/20 text-center text-gray-500 text-sm">
+        <p>凡尘修仙录 &copy; 2023 - 全自动文字修仙H5游戏</p>
+        <p class="mt-1">点击开始挂机，体验修仙乐趣</p>
+    </footer>
+
+    <script>
+        // 游戏数据模型
+        const gameData = {
+            player: {
+                name: "无名修士",
+                level: 1,
+                realm: "炼气一层",
+                cultivation: 100,
+                maxCultivation: 1000,
+                hp: 100,
+                maxHp: 100,
+                attack: 10,
+                defense: 5,
+                spirit: 8,
+                agility: 3,
+                spiritStones: 100,
+                skillPoints: 0 // 技能点
+            },
+            equipment: {
+                weapon: null,
+                armor: null,
+                accessory: null,
+                treasure: null
+            },
+            backpack: [],
+            backpackCapacity: 20,
+            isAutoFighting: false,
+            autoFightInterval: null,
+            log: [],
+            autoCastSkills: false, // 自动释放技能
+            materials: {
+                enhancementStone: 0 // 强化石数量
+            },
+            soundEnabled: true // 音效开关
+        };
+
+        // 怪物数据
+        const monsters = [
+            { name: "野狼", level: 1, hp: 50, attack: 5, defense: 2, exp: 30, spiritStones: 5, dropRate: 0.3 },
+            { name: "猛虎", level: 3, hp: 120, attack: 10, defense: 5, exp: 80, spiritStones: 12, dropRate: 0.4 },
+            { name: "毒蛇", level: 2, hp: 70, attack: 8, defense: 1, exp: 50, spiritStones: 8, dropRate: 0.35 },
+            { name: "黑熊", level: 4, hp: 180, attack: 15, defense: 8, exp: 120, spiritStones: 15, dropRate: 0.45 },
+            { name: "妖狐", level: 5, hp: 200, attack: 20, defense: 10, exp: 150, spiritStones: 20, dropRate: 0.5 }
+        ];
+
+        // 物品数据
+        const items = [
+            // 丹药
+            { id: 1, name: "下品疗伤丹", type: "potion", rarity: "uncommon", icon: "fa-flask", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { hp: 50 }, description: "普通的疗伤丹药，服用后可恢复50点生命值。", value: 10, count: 0 },
+            { id: 2, name: "中品疗伤丹", type: "potion", rarity: "rare", icon: "fa-flask", iconColor: "text-rarity-rare", bgColor: "bg-rarity-rare/20", effect: { hp: 150 }, description: "较好的疗伤丹药，服用后可恢复150点生命值。", value: 30, count: 0 },
+            { id: 3, name: "下品聚气丹", type: "potion", rarity: "uncommon", icon: "fa-flask", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { cultivation: 100 }, description: "普通的聚气丹药，服用后可增加100点修为，有助于突破境界。", value: 15, count: 0 },
+            { id: 4, name: "中品聚气丹", type: "potion", rarity: "rare", icon: "fa-flask", iconColor: "text-rarity-rare", bgColor: "bg-rarity-rare/20", effect: { cultivation: 300 }, description: "较好的聚气丹药，服用后可增加300点修为。", value: 40, count: 0 },
+            
+            // 武器
+            { id: 10, name: "铁剑", type: "weapon", rarity: "common", icon: "fa-sword", iconColor: "text-rarity-common", bgColor: "bg-rarity-common/20", effect: { attack: 5 }, enhancementLevel: 0, description: "用精铁打造的长剑，锋利度一般。", value: 60, count: 0 },
+            { id: 11, name: "青铜剑", type: "weapon", rarity: "uncommon", icon: "fa-sword", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { attack: 12 }, enhancementLevel: 0, description: "青铜锻造的宝剑，锋利无比。", value: 150, count: 0 },
+            { id: 12, name: "灵木杖", type: "weapon", rarity: "uncommon", icon: "fa-magic", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { attack: 8, spirit: 3 }, enhancementLevel: 0, description: "蕴含灵气的木杖，适合法术攻击。", value: 180, count: 0 },
+            
+            // 防具
+            { id: 20, name: "粗布道袍", type: "armor", rarity: "common", icon: "fa-shield", iconColor: "text-rarity-common", bgColor: "bg-rarity-common/20", effect: { defense: 3 }, enhancementLevel: 0, description: "普通的布袍，能提供少量防御。", value: 50, count: 0 },
+            { id: 21, name: "皮甲", type: "armor", rarity: "uncommon", icon: "fa-shield", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { defense: 8 }, enhancementLevel: 0, description: "由坚韧兽皮制成的铠甲，防御力不错。", value: 120, count: 0 },
+            { id: 22, name: "铁铠甲", type: "armor", rarity: "rare", icon: "fa-shield", iconColor: "text-rarity-rare", bgColor: "bg-rarity-rare/20", effect: { defense: 15 }, enhancementLevel: 0, description: "精铁打造的铠甲，防御力较强。", value: 300, count: 0 },
+            
+            // 饰品
+            { id: 30, name: "铜戒指", type: "accessory", rarity: "common", icon: "fa-gem", iconColor: "text-rarity-common", bgColor: "bg-rarity-common/20", effect: { attack: 2 }, enhancementLevel: 0, description: "普通铜戒指，略有增幅效果。", value: 40, count: 0 },
+            { id: 31, name: "玉佩", type: "accessory", rarity: "uncommon", icon: "fa-gem", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { defense: 3, hp: 20 }, enhancementLevel: 0, description: "温润的玉佩，能增强防御力和生命力。", value: 100, count: 0 },
+            { id: 32, name: "灵犀坠", type: "accessory", rarity: "rare", icon: "fa-gem", iconColor: "text-rarity-rare", bgColor: "bg-rarity-rare/20", effect: { spirit: 5, agility: 2 }, enhancementLevel: 0, description: "蕴含灵性的吊坠，能提升灵力和身法。", value: 250, count: 0 },
+            
+            // 材料
+            { id: 40, name: "强化石", type: "material", rarity: "common", icon: "fa-cube", iconColor: "text-rarity-common", bgColor: "bg-rarity-common/20", description: "用于强化装备的基础材料。", value: 20, count: 0 },
+            { id: 41, name: "灵兽内丹", type: "material", rarity: "uncommon", icon: "fa-circle", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", description: "从灵兽体内取出的内丹，可用于炼制丹药。", value: 80, count: 0 },
+            { id: 42, name: "妖灵血", type: "material", rarity: "rare", icon: "fa-tint", iconColor: "text-rarity-rare", bgColor: "bg-rarity-rare/20", description: "蕴含强大能量的妖灵血液，是珍贵的炼器材料。", value: 200, count: 0 },
+            
+            // 技能书
+            { id: 50, name: "基础吐纳法", type: "skill", rarity: "common", icon: "fa-book", iconColor: "text-rarity-common", bgColor: "bg-rarity-common/20", effect: { spirit: 2 }, description: "基础的吐纳法门，可小幅提升灵力。", value: 100, count: 0, unlocksSkill: "fireball" },
+            { id: 51, name: "风行步", type: "skill", rarity: "uncommon", icon: "fa-book", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { agility: 4 }, description: "轻身法门，可提升身法属性。", value: 200, count: 0, unlocksSkill: "windwalk" },
+            { id: 52, name: "铁布衫", type: "skill", rarity: "uncommon", icon: "fa-book", iconColor: "text-rarity-uncommon", bgColor: "bg-rarity-uncommon/20", effect: { defense: 5, hp: 50 }, description: "炼体法门，可提升防御和生命值。", value: 220, count: 0, unlocksSkill: "ironbody" }
+        ];
+
+        // 技能数据
+        const skills = [
+            { 
+                id: "fireball", 
+                name: "火球术", 
+                icon: "fa-fire", 
+                iconColor: "text-red-500", 
+                bgColor: "bg-red-900/30",
+                description: "释放一道火球攻击敌人，造成攻击力伤害",
+                level: 1,
+                maxLevel: 10,
+                damageMultiplier: 1.5, // 150% 攻击力
+                manaCost: 10,
+                unlocked: true,
+                unlockCondition: "初始技能",
+                upgradeCost: { spiritStones: 100, skillPoints: 1 },
+                nextLevelEffect: "伤害提升至160%攻击力"
+            },
+            { 
+                id: "windwalk", 
+                name: "风行步", 
+                icon: "fa-wind", 
+                iconColor: "text-green-500", 
+                bgColor: "bg-green-900/30",
+                description: "短时间内提升自身身法，增加闪避率",
+                level: 0,
+                maxLevel: 5,
+                agilityBoost: 20, // 提升20%身法
+                duration: 5, // 持续5秒
+                manaCost: 15,
+                unlocked: false,
+                unlockCondition: "使用风行步技能书",
+                upgradeCost: { spiritStones: 200, skillPoints: 1 },
+                nextLevelEffect: "身法提升至25%，持续时间延长至6秒"
+            },
+            { 
+                id: "ironbody", 
+                name: "铁布衫", 
+                icon: "fa-shield", 
+                iconColor: "text-yellow-500", 
+                bgColor: "bg-yellow-900/30",
+                description: "临时提升防御力，减少受到的伤害",
+                level: 0,
+                maxLevel: 5,
+                defenseBoost: 30, // 提升30%防御
+                duration: 8, // 持续8秒
+                manaCost: 20,
+                unlocked: false,
+                unlockCondition: "使用铁布衫技能书",
+                upgradeCost: { spiritStones: 250, skillPoints: 1 },
+                nextLevelEffect: "防御提升至35%，持续时间延长至9秒"
+            },
+            { 
+                id: "swordrain", 
+                name: "万剑归宗", 
+                icon: "fa-sword", 
+                iconColor: "text-purple-500", 
+                bgColor: "bg-purple-900/30",
+                description: "召唤飞剑攻击多个敌人，造成范围伤害",
+                level: 0,
+                maxLevel: 5,
+                damageMultiplier: 1.2, // 120% 攻击力
+                targets: 3, // 攻击3个目标
+                manaCost: 30,
+                unlocked: false,
+                unlockCondition: "达到筑基期",
+                upgradeCost: { spiritStones: 500, skillPoints: 2 },
+                nextLevelEffect: "伤害提升至130%攻击力，可攻击4个目标"
+            },
+            { 
+                id: "heal", 
+                name: "治愈术", 
+                icon: "fa-heart", 
+                iconColor: "text-green-500", 
+                bgColor: "bg-green-900/30",
+                description: "恢复自身一定比例的生命值",
+                level: 0,
+                maxLevel: 5,
+                healPercentage: 30, // 恢复30%最大生命值
+                manaCost: 25,
+                unlocked: false,
+                unlockCondition: "灵力达到50点",
+                upgradeCost: { spiritStones: 300, skillPoints: 1 },
+                nextLevelEffect: "恢复量提升至35%最大生命值"
+            }
+        ];
+
+        // DOM元素
+        const dom = {
+            playerName: document.getElementById('player-name'),
+            playerLevel: document.getElementById('player-level'),
+            playerRealm: document.getElementById('player-realm'),
+            cultivationProgress: document.getElementById('cultivation-progress'),
+            cultivationProgressText: document.getElementById('cultivation-progress-text'),
+            hpProgress: document.getElementById('hp-progress'),
+            hpText: document.getElementById('hp-text'),
+            attack: document.getElementById('attack'),
+            defense: document.getElementById('defense'),
+            spirit: document.getElementById('spirit'),
+            agility: document.getElementById('agility'),
+            spiritStones: document.getElementById('spirit-stones'),
+            battleLog: document.getElementById('battle-log'),
+            startAutoBtn: document.getElementById('start-auto-btn'),
+            stopAutoBtn: document.getElementById('stop-auto-btn'),
+            clearLogBtn: document.getElementById('clear-log-btn'),
+            backpackBtn: document.getElementById('backpack-btn'),
+            backpackModal: document.getElementById('backpack-modal'),
+            closeBackpackBtn: document.getElementById('close-backpack-btn'),
+            backpackContent: document.getElementById('backpack-content'),
+            backpackCount: document.getElementById('backpack-count'),
+            backpackCapacity: document.getElementById('backpack-capacity'),
+            backpackSearch: document.getElementById('backpack-search'),
+            expandBackpackBtn: document.getElementById('expand-backpack-btn'),
+            equipmentBtn: document.getElementById('equipment-btn'),
+            equipmentModal: document.getElementById('equipment-modal'),
+            closeEquipmentBtn: document.getElementById('close-equipment-btn'),
+            weaponSlot: document.getElementById('weapon-slot'),
+            armorSlot: document.getElementById('armor-slot'),
+            accessorySlot: document.getElementById('accessory-slot'),
+            treasureSlot: document.getElementById('treasure-slot'),
+            treasureUnlockCondition: document.getElementById('treasure-unlock-condition'),
+            totalAttack: document.getElementById('total-attack'),
+            totalDefense: document.getElementById('total-defense'),
+            totalSpirit: document.getElementById('total-spirit'),
+            totalAgility: document.getElementById('total-agility'),
+            enhancementArea: document.getElementById('enhancement-area'),
+            shopBtn: document.getElementById('shop-btn'),
+            shopModal: document.getElementById('shop-modal'),
+            closeShopBtn: document.getElementById('close-shop-btn'),
+            shopSpiritStones: document.getElementById('shop-spirit-stones'),
+            shopContent: document.getElementById('shop-content'),
+            skillsBtn: document.getElementById('skills-btn'),
+            skillsModal: document.getElementById('skills-modal'),
+            closeSkillsBtn: document.getElementById('close-skills-btn'),
+            skillsContent: document.getElementById('skills-content'),
+            autoCastBtn: document.getElementById('auto-cast-btn'),
+            autoCastStatus: document.getElementById('auto-cast-status'),
+            itemDetailModal: document.getElementById('item-detail-modal'),
+            closeItemDetailBtn: document.getElementById('close-item-detail-btn'),
+            itemDetailName: document.getElementById('item-detail-name'),
+            itemDetailIcon: document.getElementById('item-detail-icon'),
+            itemDetailRarity: document.getElementById('item-detail-rarity'),
+            itemDetailCount: document.getElementById('item-detail-count'),
+            itemDetailType: document.getElementById('item-detail-type'),
+            itemDetailDesc: document.getElementById('item-detail-desc'),
+            itemDetailEffects: document.getElementById('item-detail-effects'),
+            useItemBtn: document.getElementById('use-item-btn'),
+            sellItemBtn: document.getElementById('sell-item-btn'),
+            soundToggle: document.getElementById('sound-toggle'),
+            enhancementModal: document.getElementById('enhancement-modal'),
+            closeEnhancementBtn: document.getElementById('close-enhancement-btn'),
+            enhancementItemIcon: document.getElementById('enhancement-item-icon'),
+            enhancementItemName: document.getElementById('enhancement-item-name'),
+            enhancementItemLevel: document.getElementById('enhancement-item-level'),
+            enhancementStoneCost: document.getElementById('enhancement-stone-cost'),
+            enhancementMaterialCost: document.getElementById('enhancement-material-cost'),
+            enhancementMaterialCount: document.getElementById('enhancement-material-count'),
+            enhancementSuccessRate: document.getElementById('enhancement-success-rate'),
+            enhancementSuccessBar: document.getElementById('enhancement-success-bar'),
+            confirmEnhancementBtn: document.getElementById('confirm-enhancement-btn'),
+            skillUpgradeModal: document.getElementById('skill-upgrade-modal'),
+            closeSkillUpgradeBtn: document.getElementById('close-skill-upgrade-btn'),
+            skillUpgradeIcon: document.getElementById('skill-upgrade-icon'),
+            skillUpgradeName: document.getElementById('skill-upgrade-name'),
+            skillCurrentLevel: document.getElementById('skill-current-level'),
+            skillNextLevel: document.getElementById('skill-next-level'),
+            skillCurrentEffect: document.getElementById('skill-current-effect'),
+            skillNextEffect: document.getElementById('skill-next-effect'),
+            skillUpgradeStoneCost: document.getElementById('skill-upgrade-stone-cost'),
+            skillUpgradePointCost: document.getElementById('skill-upgrade-point-cost'),
+            confirmSkillUpgradeBtn: document.getElementById('confirm-skill-upgrade-btn'),
+            enhanceButtons: document.querySelectorAll('.enhance-equipment-btn')
+        };
+
+        // 当前选中的物品和装备
+        let selectedItem = null;
+        let selectedEquipmentSlot = null;
+        let selectedSkill = null;
+
+        // 初始化游戏
+        function initGame() {
+            // 初始化商店内容
+            initShop();
+            
+            // 初始化技能界面
+            initSkills();
+            
+            // 更新UI和设置事件监听
+            updateUI();
+            setupEventListeners();
+            
+            // 给新玩家一些初始物品
+            addItemToBackpack(1, 2); // 2个下品疗伤丹
+            addItemToBackpack(3, 3); // 3个下品聚气丹
+            addItemToBackpack(10, 1); // 1把铁剑
+            addItemToBackpack(20, 1); // 1件粗布道袍
+            addItemToBackpack(40, 2); // 2个强化石
+        }
+
+        // 初始化商店内容
+        function initShop() {
+            // 筛选可出售的物品
+            const sellableItems = items.filter(item => 
+                item.type !== "skill" || item.id === 50 || item.id === 51 || item.id === 52
+            );
+            
+            // 生成商店内容
+            dom.shopContent.innerHTML = '';
+            sellableItems.forEach(item => {
+                const itemElement = document.createElement('div');
+                itemElement.className = `bg-gray-800 rounded-lg p-3 border border-gray-700 hover:border-primary/50 transition-colors flex justify-between items-center shop-item ${item.type}`;
+                itemElement.dataset.id = item.id;
+                
+                // 处理物品稀有度显示
+                let rarityText = '';
+                switch(item.rarity) {
+                    case 'common': rarityText = '凡品'; break;
+                    case 'uncommon': rarityText = '下品'; break;
+                    case 'rare': rarityText = '中品'; break;
+                    case 'epic': rarityText = '上品'; break;
+                    case 'legendary': rarityText = '极品'; break;
+                }
+                
+                // 处理物品效果显示
+                let effectText = '';
+                if (item.effect) {
+                    const effects = [];
+                    if (item.effect.attack) effects.push(`攻击+${item.effect.attack}`);
+                    if (item.effect.defense) effects.push(`防御+${item.effect.defense}`);
+                    if (item.effect.spirit) effects.push(`灵力+${item.effect.spirit}`);
+                    if (item.effect.agility) effects.push(`身法+${item.effect.agility}`);
+                    if (item.effect.hp) effects.push(`生命+${item.effect.hp}`);
+                    if (item.effect.cultivation) effects.push(`修为+${item.effect.cultivation}`);
+                    effectText = effects.join('，');
+                }
+                
+                itemElement.innerHTML = `
+                    <div class="flex items-center">
+                        <div class="${item.bgColor} w-12 h-12 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fa ${item.icon} ${item.iconColor} text-xl"></i>
+                        </div>
+                        <div>
+                            <div class="flex items-center">
+                                <h4 class="font-medium">${item.name}</h4>
+                                <span class="ml-2 text-xs bg-${item.rarity === 'common' ? 'gray' : 'rarity-' + item.rarity}/30 text-${item.rarity === 'common' ? 'gray-400' : 'rarity-' + item.rarity} px-1.5 py-0.5 rounded">${rarityText}</span>
+                            </div>
+                            <p class="text-xs text-gray-400">${effectText || item.description}</p>
+                        </div>
+                    </div>
+                    <button class="bg-accent hover:bg-accent/80 text-dark px-3 py-1 rounded-lg text-sm font-bold transition-colors flex items-center">
+                        <i class="fa fa-diamond mr-1"></i> ${item.value}
+                    </button>
+                `;
+                
+                // 添加购买事件
+                const buyBtn = itemElement.querySelector('button');
+                buyBtn.addEventListener('click', () => buyItem(item.id));
+                
+                dom.shopContent.appendChild(itemElement);
+            });
+        }
+
+        // 初始化技能界面
+        function initSkills() {
+            dom.skillsContent.innerHTML = '';
+            
+            skills.forEach(skill => {
+                const skillElement = document.createElement('div');
+                const isUnlocked = skill.unlocked;
+                
+                skillElement.className = `bg-gray-800 rounded-lg p-4 border ${isUnlocked ? 'border-primary/30' : 'border-gray-700 opacity-60'} skill-item`;
+                skillElement.dataset.id = skill.id;
+                
+                // 技能效果描述
+                let effectDesc = '';
+                if (skill.damageMultiplier) {
+                    effectDesc = `造成${(skill.damageMultiplier * 100).toFixed(0)}%攻击力伤害`;
+                    if (skill.targets && skill.targets > 1) {
+                        effectDesc += `，攻击${skill.targets}个目标`;
+                    }
+                } else if (skill.agilityBoost) {
+                    effectDesc = `提升${skill.agilityBoost}%身法，持续${skill.duration}秒`;
+                } else if (skill.defenseBoost) {
+                    effectDesc = `提升${skill.defenseBoost}%防御，持续${skill.duration}秒`;
+                } else if (skill.healPercentage) {
+                    effectDesc = `恢复${skill.healPercentage}%最大生命值`;
+                }
+                
+                // 升级按钮
+                let upgradeBtn = '';
+                if (isUnlocked && skill.level < skill.maxLevel) {
+                    upgradeBtn = `
+                        <button class="upgrade-skill-btn mt-3 text-xs bg-primary/20 text-primary px-2 py-1 rounded hover:bg-primary/30 transition-colors">
+                            升级技能 (${skill.upgradeCost.skillPoints}技能点)
+                        </button>
+                    `;
+                }
+                
+                skillElement.innerHTML = `
+                    <div class="flex justify-between items-start">
+                        <div class="flex">
+                            <div class="${skill.bgColor} w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                                <i class="fa ${skill.icon} ${skill.iconColor}"></i>
+                            </div>
+                            <div>
+                                <div class="flex items-center">
+                                    <h4 class="font-medium ${isUnlocked ? 'text-accent' : ''}">${skill.name}</h4>
+                                    ${isUnlocked ? `<span class="ml-2 text-xs bg-gray-700 text-gray-300 px-1.5 py-0.5 rounded">Lv.${skill.level}</span>` : ''}
+                                </div>
+                                <p class="text-xs text-gray-400 mt-1">${effectDesc}</p>
+                                ${isUnlocked ? `<p class="text-xs text-gray-500 mt-1">灵力消耗: ${skill.manaCost}</p>` : ''}
+                            </div>
+                        </div>
+                        <span class="bg-${isUnlocked ? 'primary/20 text-primary' : 'gray-600 text-gray-300'} text-xs px-2 py-1 rounded-full">${isUnlocked ? '已解锁' : '未解锁'}</span>
+                    </div>
+                    ${isUnlocked ? `
+                    <div class="mt-3">
+                        <div class="flex justify-between text-xs mb-1">
+                            <span>等级 ${skill.level}/${skill.maxLevel}</span>
+                            <span>${skill.level < skill.maxLevel ? `下一级: ${skill.nextLevelEffect}` : '已达满级'}</span>
+                        </div>
+                        <div class="h-1.5 bg-gray-700 rounded-full overflow-hidden">
+                            <div class="h-full bg-primary" style="width: ${(skill.level / skill.maxLevel) * 100}%"></div>
+                        </div>
+                    </div>
+                    ${upgradeBtn}
+                    ` : `
+                    <div class="mt-3 text-xs text-gray-500">
+                        解锁条件: ${skill.unlockCondition}
+                    </div>
+                    `}
+                `;
+                
+                // 添加升级技能事件
+                if (isUnlocked && skill.level < skill.maxLevel) {
+                    const upgradeBtn = skillElement.querySelector('.upgrade-skill-btn');
+                    upgradeBtn.addEventListener('click', () => openSkillUpgradeModal(skill.id));
+                }
+                
+                dom.skillsContent.appendChild(skillElement);
+            });
+        }
+
+        // 设置事件监听器
+        function setupEventListeners() {
+            // 自动战斗按钮
+            dom.startAutoBtn.addEventListener('click', startAutoFight);
+            dom.stopAutoBtn.addEventListener('click', stopAutoFight);
+            
+            // 日志清空按钮
+            dom.clearLogBtn.addEventListener('click', clearLog);
+            
+            // 背包相关
+            dom.backpackBtn.addEventListener('click', () => dom.backpackModal.classList.remove('hidden'));
+            dom.closeBackpackBtn.addEventListener('click', () => dom.backpackModal.classList.add('hidden'));
+            dom.expandBackpackBtn.addEventListener('click', expandBackpack);
+            
+            // 背包搜索
+            dom.backpackSearch.addEventListener('input', filterBackpackItems);
+            
+            // 背包分类
+            document.querySelectorAll('.backpack-category').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // 更新按钮样式
+                    document.querySelectorAll('.backpack-category').forEach(b => {
+                        b.classList.remove('text-accent', 'border-b-2', 'border-accent');
+                        b.classList.add('text-gray-400');
+                    });
+                    e.target.classList.add('text-accent', 'border-b-2', 'border-accent');
+                    e.target.classList.remove('text-gray-400');
+                    
+                    // 筛选物品
+                    filterBackpackItems();
+                });
+            });
+            
+            // 装备相关
+            dom.equipmentBtn.addEventListener('click', () => dom.equipmentModal.classList.remove('hidden'));
+            dom.closeEquipmentBtn.addEventListener('click', () => dom.equipmentModal.classList.add('hidden'));
+            
+            // 装备卸下按钮
+            document.querySelectorAll('.equip-unequip-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const slot = e.target.dataset.slot;
+                    unequipItem(slot);
+                });
+            });
+            
+            // 装备强化按钮
+            document.querySelectorAll('.enhance-equipment-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const slot = e.target.dataset.slot;
+                    openEnhancementModal(slot);
+                });
+            });
+            
+            // 商店相关
+            dom.shopBtn.addEventListener('click', () => {
+                dom.shopSpiritStones.textContent = gameData.player.spiritStones;
+                dom.shopModal.classList.remove('hidden');
+            });
+            dom.closeShopBtn.addEventListener('click', () => dom.shopModal.classList.add('hidden'));
+            
+            // 商店分类
+            document.querySelectorAll('.shop-category').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // 更新按钮样式
+                    document.querySelectorAll('.shop-category').forEach(b => {
+                        b.classList.remove('text-accent', 'border-b-2', 'border-accent');
+                        b.classList.add('text-gray-400');
+                    });
+                    e.target.classList.add('text-accent', 'border-b-2', 'border-accent');
+                    e.target.classList.remove('text-gray-400');
+                    
+                    // 筛选商品
+                    const category = e.target.dataset.category;
+                    filterShopItems(category);
+                });
+            });
+            
+            // 技能相关
+            dom.skillsBtn.addEventListener('click', () => dom.skillsModal.classList.remove('hidden'));
+            dom.closeSkillsBtn.addEventListener('click', () => dom.skillsModal.classList.add('hidden'));
+            
+            // 技能筛选
+            document.querySelectorAll('.skill-filter').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    // 更新按钮样式
+                    document.querySelectorAll('.skill-filter').forEach(b => {
+                        b.classList.remove('bg-primary/20', 'text-primary');
+                        b.classList.add('bg-gray-700', 'text-gray-300');
+                    });
+                    e.target.classList.add('bg-primary/20', 'text-primary');
+                    e.target.classList.remove('bg-gray-700', 'text-gray-300');
+                    
+                    // 筛选技能
+                    const filter = e.target.dataset.filter;
+                    filterSkills(filter);
+                });
+            });
+            
+            // 自动释放技能切换
+            dom.autoCastBtn.addEventListener('click', () => {
+                gameData.autoCastSkills = !gameData.autoCastSkills;
+                dom.autoCastStatus.textContent = gameData.autoCastSkills ? '开启' : '关闭';
+                addLog(`${gameData.autoCastSkills ? '开启' : '关闭'}技能自动释放`, "text-gray-400");
+            });
+            
+            // 物品详情相关
+            dom.closeItemDetailBtn.addEventListener('click', () => dom.itemDetailModal.classList.add('hidden'));
+            dom.useItemBtn.addEventListener('click', useSelectedItem);
+            dom.sellItemBtn.addEventListener('click', sellSelectedItem);
+            
+            // 装备强化相关
+            dom.closeEnhancementBtn.addEventListener('click', () => dom.enhancementModal.classList.add('hidden'));
+            dom.confirmEnhancementBtn.addEventListener('click', confirmEnhancement);
+            
+            // 技能升级相关
+            dom.closeSkillUpgradeBtn.addEventListener('click', () => dom.skillUpgradeModal.classList.add('hidden'));
+            dom.confirmSkillUpgradeBtn.addEventListener('click', confirmSkillUpgrade);
+            
+            // 音效开关
+            dom.soundToggle.addEventListener('click', toggleSound);
+        }
+
+        // 开始自动战斗
+        function startAutoFight() {
+            if (gameData.isAutoFighting) return;
+            
+            gameData.isAutoFighting = true;
+            dom.startAutoBtn.classList.add('hidden');
+            dom.stopAutoBtn.classList.remove('hidden');
+            
+            addLog("开始自动修炼和战斗...", "text-accent");
+            
+            // 每3-5秒自动战斗一次
+            gameData.autoFightInterval = setInterval(() => {
+                // 有30%概率是修炼，70%概率是遇怪
+                if (Math.random() < 0.3) {
+                    cultivate();
+                } else {
+                    encounterMonster();
+                }
+            }, getRandomInt(3000, 5000));
+        }
+
+        // 停止自动战斗
+        function stopAutoFight() {
+            if (!gameData.isAutoFighting) return;
+            
+            gameData.isAutoFighting = false;
+            dom.startAutoBtn.classList.remove('hidden');
+            dom.stopAutoBtn.classList.add('hidden');
+            
+            clearInterval(gameData.autoFightInterval);
+            addLog("已停止自动修炼和战斗", "text-gray-400");
+        }
+
+        // 修炼
+        function cultivate() {
+            const gain = Math.floor(Math.random() * 50) + 30 + (gameData.player.spirit * 2);
+            gameData.player.cultivation += gain;
+            
+            addLog(`进行吐纳修炼，获得了${gain}点修为`, "text-green-400");
+            
+            checkLevelUp();
+            updateUI();
+        }
+
+        // 遭遇怪物
+        function encounterMonster() {
+            // 根据玩家等级选择合适的怪物
+            const suitableMonsters = monsters.filter(mon => 
+                mon.level >= gameData.player.level - 1 && 
+                mon.level <= gameData.player.level + 2
+            );
+            
+            // 随机选择一个怪物
+            const monster = suitableMonsters[Math.floor(Math.random() * suitableMonsters.length)];
+            
+            addLog(`遭遇了${monster.name}！准备战斗！`, "text-yellow-400");
+            
+            // 模拟战斗延迟
+            setTimeout(() => {
+                fightMonster(monster);
+            }, 1000);
+        }
+
+        // 与怪物战斗
+        function fightMonster(monster) {
+            // 战斗逻辑
+            let playerHp = gameData.player.hp;
+            let monsterHp = monster.hp;
+            let usedSkills = [];
+            
+            // 计算命中率和伤害
+            while (playerHp > 0 && monsterHp > 0) {
+                // 有概率使用技能
+                let skillUsed = false;
+                if (gameData.autoCastSkills && Math.random() < 0.3) {
+                    const availableSkills = skills.filter(skill => 
+                        skill.unlocked && 
+                        skill.manaCost <= gameData.player.spirit * 5 && // 简单的灵力消耗检查
+                        !usedSkills.includes(skill.id) // 防止连续使用同一技能
+                    );
+                    
+                    if (availableSkills.length > 0) {
+                        const skill = availableSkills[Math.floor(Math.random() * availableSkills.length)];
+                        usedSkills.push(skill.id);
+                        skillUsed = true;
+                        
+                        // 技能效果
+                        let damage = 0;
+                        if (skill.damageMultiplier) {
+                            damage = Math.max(1, Math.floor(gameData.player.attack * skill.damageMultiplier - monster.defense / 2));
+                            monsterHp -= damage;
+                            addLog(`使用了${skill.name}，对${monster.name}造成了${damage}点伤害！`, "text-purple-400");
+                        } else if (skill.agilityBoost) {
+                            addLog(`使用了${skill.name}，身法提升${skill.agilityBoost}%！`, "text-green-400");
+                        } else if (skill.defenseBoost) {
+                            addLog(`使用了${skill.name}，防御提升${skill.defenseBoost}%！`, "text-blue-400");
+                        } else if (skill.healPercentage) {
+                            const healAmount = Math.floor(gameData.player.maxHp * skill.healPercentage / 100);
+                            playerHp = Math.min(gameData.player.maxHp, playerHp + healAmount);
+                            addLog(`使用了${skill.name}，恢复了${healAmount}点生命值！`, "text-green-400");
+                        }
+                    }
+                }
+                
+                // 普通攻击
+                if (!skillUsed) {
+                    const hitChance = 0.8 + (gameData.player.agility - monster.level) * 0.02;
+                    if (Math.random() < hitChance) {
+                        const damage = Math.max(1, gameData.player.attack - monster.defense / 2);
+                        monsterHp -= damage;
+                        addLog(`对${monster.name}造成了${damage}点伤害！`, "text-gray-300");
+                    } else {
+                        addLog(`攻击被${monster.name}闪避了！`, "text-yellow-400");
+                    }
+                }
+                
+                // 怪物攻击
+                if (monsterHp > 0) {
+                    const monsterHitChance = 0.7 + (monster.level - gameData.player.agility) * 0.02;
+                    if (Math.random() < monsterHitChance) {
+                        const damage = Math.max(1, monster.attack - gameData.player.defense / 2);
+                        playerHp -= damage;
+                        addLog(`${monster.name}对你造成了${damage}点伤害！`, "text-red-400");
+                    } else {
+                        addLog(`成功闪避了${monster.name}的攻击！`, "text-green-400");
+                    }
+                }
+            }
+            
+            // 更新玩家生命值
+            gameData.player.hp = Math.max(0, playerHp);
+            
+            // 战斗结果
+            if (playerHp > 0) {
+                // 胜利
+                addLog(`成功击败了${monster.name}，获得了${monster.exp}点经验和${monster.spiritStones}灵石！`, "text-green-400");
+                
+                // 增加灵石
+                gameData.player.spiritStones += monster.spiritStones;
+                
+                // 增加修为（等同于经验）
+                gameData.player.cultivation += monster.exp;
+                
+                // 有概率掉落物品
+                if (Math.random() < monster.dropRate) {
+                    // 不同怪物掉落不同类型物品的概率不同
+                    let dropType = 'potion';
+                    const dropTypeRand = Math.random();
+                    if (dropTypeRand < 0.3) dropType = 'potion';
+                    else if (dropTypeRand < 0.5) dropType = 'material';
+                    else if (dropTypeRand < 0.7) dropType = 'weapon';
+                    else if (dropTypeRand < 0.9) dropType = 'armor';
+                    else dropType = 'accessory';
+                    
+                    const dropItems = items.filter(item => item.type === dropType && item.rarity !== 'legendary');
+                    const droppedItem = dropItems[Math.floor(Math.random() * dropItems.length)];
+                    addItemToBackpack(droppedItem.id, 1);
+                    addLog(`击败${monster.name}，获得了${droppedItem.name}！`, "text-accent");
+                }
+                
+                checkLevelUp();
+            } else {
+                // 失败
+                addLog(`很遗憾，被${monster.name}击败了...损失了一些修为`, "text-red-400");
+                
+                // 减少修为
+                gameData.player.cultivation = Math.max(0, gameData.player.cultivation - Math.floor(monster.exp / 2));
+                
+                // 恢复少量生命值
+                gameData.player.hp = Math.floor(gameData.player.maxHp * 0.3);
+            }
+            
+            updateUI();
+        }
+
+        // 检查是否升级
+        function checkLevelUp() {
+            if (gameData.player.cultivation >= gameData.player.maxCultivation) {
+                // 升级
+                gameData.player.level += 1;
+                gameData.player.cultivation -= gameData.player.maxCultivation;
+                
+                // 每5级获得1个技能点
+                if (gameData.player.level % 5 === 0) {
+                    gameData.player.skillPoints += 1;
+                    addLog(`获得1个技能点！当前剩余: ${gameData.player.skillPoints}`, "text-purple-400");
+                }
+                
+                // 提升最大修为（下一级所需）
+                gameData.player.maxCultivation = Math.floor(gameData.player.maxCultivation * 1.5);
+                
+                // 提升属性
+                gameData.player.attack += getRandomInt(2, 4);
+                gameData.player.defense += getRandomInt(1, 3);
+                gameData.player.spirit += getRandomInt(1, 2);
+                gameData.player.agility += getRandomInt(1, 2);
+                
+                // 提升生命值
+                gameData.player.maxHp += getRandomInt(20, 40);
+                gameData.player.hp = gameData.player.maxHp; // 升级满血
+                
+                // 检查是否突破境界
+                checkRealmBreakthrough();
+                
+                // 检查是否解锁新技能
+                checkSkillUnlocks();
+                
+                addLog(`恭喜！升级到了${gameData.player.level}级！各项属性得到提升！`, "text-accent");
+            }
+        }
+
+        // 检查是否突破境界
+        function checkRealmBreakthrough() {
+            const realms = ["炼气一层", "炼气二层", "炼气三层", "炼气四层", "炼气五层", 
+                           "筑基一层", "筑基二层", "筑基三层", "筑基四层", "筑基五层",
+                           "金丹期", "元婴期", "化神期", "炼虚期", "合体期", "大乘期", "渡劫期"];
+                           
+            const realmIndex = Math.floor((gameData.player.level - 1) / 5);
+            const newRealm = realms[Math.min(realmIndex, realms.length - 1)];
+            
+            if (newRealm !== gameData.player.realm) {
+                gameData.player.realm = newRealm;
+                
+                // 境界突破奖励
+                gameData.player.spiritStones += 100 * (realmIndex + 1);
+                addLog(`恭喜！成功突破到${newRealm}！获得${100 * (realmIndex + 1)}灵石奖励！`, "text-purple-400");
+                
+                // 筑基期解锁法宝栏
+                if (newRealm === "筑基一层") {
+                    dom.treasureSlot.innerHTML = '<i class="fa fa-magic text-3xl mr-2"></i><span>可装备</span>';
+                    dom.treasureUnlockCondition.classList.add('hidden');
+                    addLog("已解锁法宝装备栏！", "text-accent");
+                }
+            }
+        }
+
+        // 检查是否解锁新技能
+        function checkSkillUnlocks() {
+            // 检查万剑归宗解锁条件
+            if (gameData.player.realm === "筑基一层" || gameData.player.realm === "筑基二层") {
+                const swordrainSkill = skills.find(s => s.id === "swordrain");
+                if (!swordrainSkill.unlocked) {
+                    swordrainSkill.unlocked = true;
+                    swordrainSkill.level = 1;
+                    addLog("恭喜！已解锁新技能：万剑归宗！", "text-accent");
+                    initSkills(); // 更新技能界面
+                }
+            }
+            
+            // 检查治愈术解锁条件
+            if (gameData.player.spirit >= 50) {
+                const healSkill = skills.find(s => s.id === "heal");
+                if (!healSkill.unlocked) {
+                    healSkill.unlocked = true;
+                    healSkill.level = 1;
+                    addLog("恭喜！已解锁新技能：治愈术！", "text-accent");
+                    initSkills(); // 更新技能界面
+                }
+            }
+        }
+
+        // 添加物品到背包
+        function addItemToBackpack(itemId, count) {
+            if (getTotalItemsInBackpack() >= gameData.backpackCapacity) {
+                addLog("背包已满，无法获取新物品！", "text-red-400");
+                return false;
+            }
+            
+            const item = items.find(i => i.id === itemId);
+            if (!item) return false;
+            
+            // 特殊处理强化石
+            if (itemId === 40) {
+                gameData.materials.enhancementStone += count;
+                updateUI();
+                return true;
+            }
+            
+            // 检查背包中是否已有该物品
+            const existingItem = gameData.backpack.find(i => i.id === itemId);
+            
+            if (existingItem) {
+                existingItem.count += count;
+            } else {
+                // 复制物品对象并设置数量
+                const newItem = {...item, count: count};
+                gameData.backpack.push(newItem);
+            }
+            
+            updateBackpackUI();
+            return true;
+        }
+
+        // 从背包移除物品
+        function removeItemFromBackpack(itemId, count = 1) {
+            // 特殊处理强化石
+            if (itemId === 40) {
+                if (gameData.materials.enhancementStone >= count) {
+                    gameData.materials.enhancementStone -= count;
+                    updateUI();
+                    return true;
+                }
+                return false;
+            }
+            
+            const index = gameData.backpack.findIndex(i => i.id === itemId);
+            if (index === -1) return false;
+            
+            if (gameData.backpack[index].count > count) {
+                gameData.backpack[index].count -= count;
+            } else {
+                gameData.backpack.splice(index, 1);
+            }
+            
+            updateBackpackUI();
+            return true;
+        }
+
+        // 获取背包中物品总数
+        function getTotalItemsInBackpack() {
+            return gameData.backpack.reduce((total, item) => total + item.count, 0) + gameData.materials.enhancementStone;
+        }
+
+        // 使用物品
+        function useItem(itemId) {
+            const item = itemId === 40 
+                ? items.find(i => i.id === itemId) 
+                : gameData.backpack.find(i => i.id === itemId);
+            
+            if (!item) return false;
+            
+            // 根据物品类型处理效果
+            if (item.type === "potion") {
+                if (item.effect.hp) {
+                    // 疗伤丹
+                    gameData.player.hp = Math.min(gameData.player.maxHp, gameData.player.hp + item.effect.hp);
+                    addLog(`使用了${item.name}，恢复了${item.effect.hp}点生命值`, "text-green-400");
+                } else if (item.effect.cultivation) {
+                    // 聚气丹
+                    gameData.player.cultivation += item.effect.cultivation;
+                    addLog(`使用了${item.name}，获得了${item.effect.cultivation}点修为`, "text-green-400");
+                    checkLevelUp();
+                }
+            } else if (item.type === "weapon" || item.type === "armor" || item.type === "accessory") {
+                // 装备物品
+                equipItem(itemId, item.type);
+                return true;
+            } else if (item.type === "skill" && item.unlocksSkill) {
+                // 学习技能
+                const skill = skills.find(s => s.id === item.unlocksSkill);
+                if (skill && !skill.unlocked) {
+                    skill.unlocked = true;
+                    skill.level = 1;
+                    addLog(`学习了${item.name}，成功解锁技能${skill.name}！`, "text-accent");
+                    addLog(`${item.effect.spirit ? `灵力提升了${item.effect.spirit}点` : ''}${item.effect.agility ? `，身法提升了${item.effect.agility}点` : ''}${item.effect.defense ? `，防御提升了${item.effect.defense}点` : ''}`, "text-green-400");
+                    
+                    // 提升属性
+                    if (item.effect.spirit) gameData.player.spirit += item.effect.spirit;
+                    if (item.effect.agility) gameData.player.agility += item.effect.agility;
+                    if (item.effect.defense) gameData.player.defense += item.effect.defense;
+                    if (item.effect.hp) {
+                        gameData.player.maxHp += item.effect.hp;
+                        gameData.player.hp = gameData.player.maxHp;
+                    }
+                    
+                    initSkills(); // 更新技能界面
+                } else {
+                    addLog("该技能已解锁！", "text-yellow-400");
+                    return false;
+                }
+            } else if (item.type === "material") {
+                addLog("该物品不能直接使用，可用于炼制或强化！", "text-yellow-400");
+                return false;
+            }
+            
+            // 移除一个物品
+            removeItemFromBackpack(itemId, 1);
+            updateUI();
+            return true;
+        }
+
+        // 装备物品
+        function equipItem(itemId, type) {
+            const item = items.find(i => i.id === itemId);
+            if (!item) return false;
+            
+            // 如果已有装备，放回背包
+            const currentEquipment = gameData.equipment[type];
+            if (currentEquipment) {
+                addItemToBackpack(currentEquipment.id, 1);
+            }
+            
+            // 装备新物品
+            gameData.equipment[type] = {...item};
+            removeItemFromBackpack(itemId, 1);
+            
+            addLog(`装备了${item.name}`, "text-blue-400");
+            updateEquipmentUI();
+            updatePlayerStats();
+            return true;
+        }
+
+        // 卸下装备
+        function unequipItem(slot) {
+            const item = gameData.equipment[slot];
+            if (!item) return false;
+            
+            // 将装备放回背包
+            if (addItemToBackpack(item.id, 1)) {
+                // 卸下装备
+                gameData.equipment[slot] = null;
+                addLog(`卸下了${item.name}`, "text-blue-400");
+                updateEquipmentUI();
+                updatePlayerStats();
+                return true;
+            }
+            
+            return false;
+        }
+
+        // 出售物品
+        function sellItem(itemId) {
+            const item = itemId === 40 
+                ? items.find(i => i.id === itemId) 
+                : gameData.backpack.find(i => i.id === itemId);
+            
+            if (!item) return false;
+            
+            // 增加灵石
+            gameData.player.spiritStones += item.value;
+            addLog(`出售了${item.name}，获得了${item.value}灵石`, "text-green-400");
+            
+            // 移除一个物品
+            removeItemFromBackpack(itemId, 1);
+            updateUI();
+            return true;
+        }
+
+        // 购买物品
+        function buyItem(itemId) {
+            const item = items.find(i => i.id === itemId);
+            if (!item) return false;
+            
+            // 检查灵石是否足够
+            if (gameData.player.spiritStones < item.value) {
+                addLog("灵石不足，无法购买！", "text-red-400");
+                return false;
+            }
+            
+            // 检查背包是否有空间
+            if (getTotalItemsInBackpack() >= gameData.backpackCapacity) {
+                addLog("背包已满，无法购买！", "text-red-400");
+                return false;
+            }
+            
+            // 扣除灵石并添加物品
+            gameData.player.spiritStones -= item.value;
+            addItemToBackpack(itemId, 1);
+            
+            addLog(`花费${item.value}灵石购买了${item.name}`, "text-blue-400");
+            dom.shopSpiritStones.textContent = gameData.player.spiritStones;
+            updateUI();
+            return true;
+        }
+
+        // 扩充背包
+        function expandBackpack() {
+            const cost = 50;
+            if (gameData.player.spiritStones < cost) {
+                addLog("灵石不足，无法扩充背包！", "text-red-400");
+                return false;
+            }
+            
+            gameData.player.spiritStones -= cost;
+            gameData.backpackCapacity += 10;
+            addLog(`花费${cost}灵石扩充了背包，当前容量: ${gameData.backpackCapacity}`, "text-accent");
+            updateBackpackUI();
+            updateUI();
+            return true;
+        }
+
+        // 打开装备强化弹窗
+        function openEnhancementModal(slot) {
+            const item = gameData.equipment[slot];
+            if (!item) return;
+            
+            selectedEquipmentSlot = slot;
+            
+            // 设置弹窗内容
+            dom.enhancementItemIcon.className = `${item.bgColor} w-12 h-12 rounded-lg flex items-center justify-center`;
+            dom.enhancementItemIcon.innerHTML = `<i class="fa ${item.icon} ${item.iconColor} text-xl"></i>`;
+            dom.enhancementItemName.textContent = item.name;
+            dom.enhancementItemLevel.textContent = item.enhancementLevel + 1;
+            
+            // 计算强化消耗（随强化等级增加）
+            const level = item.enhancementLevel;
+            const stoneCost = 50 * (level + 1);
+            const materialCount = 1 + Math.floor(level / 3); // 每3级多消耗1个强化石
+            const successRate = Math.max(30, 80 - (level * 5)); // 成功率随等级降低，最低30%
+            
+            dom.enhancementStoneCost.textContent = stoneCost;
+            dom.enhancementMaterialCount.textContent = materialCount;
+            dom.enhancementSuccessRate.textContent = `${successRate}%`;
+            dom.enhancementSuccessBar.style.width = `${successRate}%`;
+            dom.enhancementSuccessBar.className = `h-full ${successRate > 50 ? 'bg-green-500' : successRate > 30 ? 'bg-yellow-500' : 'bg-red-500'}`;
+            
+            dom.enhancementModal.classList.remove('hidden');
+        }
+
+        // 确认强化装备
+        function confirmEnhancement() {
+            if (!selectedEquipmentSlot) return;
+            
+            const item = gameData.equipment[selectedEquipmentSlot];
+            if (!item) {
+                dom.enhancementModal.classList.add('hidden');
+                return;
+            }
+            
+            // 计算强化消耗
+            const level = item.enhancementLevel;
+            const stoneCost = 50 * (level + 1);
+            const materialCount = 1 + Math.floor(level / 3);
+            
+            // 检查资源是否足够
+            if (gameData.player.spiritStones < stoneCost) {
+                addLog("灵石不足，无法强化装备！", "text-red-400");
+                return;
+            }
+            
+            if (gameData.materials.enhancementStone < materialCount) {
+                addLog("强化石不足，无法强化装备！", "text-red-400");
+                return;
+            }
+            
+            // 扣除消耗
+            gameData.player.spiritStones -= stoneCost;
+            gameData.materials.enhancementStone -= materialCount;
+            
+            // 计算成功率
+            const successRate = Math.max(30, 80 - (level * 5));
+            const success = Math.random() * 100 < successRate;
+            
+            if (success) {
+                // 强化成功
+                item.enhancementLevel += 1;
+                
+                // 提升装备属性（基础属性的10%每级）
+                for (const prop in item.effect) {
+                    const baseValue = items.find(i => i.id === item.id).effect[prop];
+                    item.effect[prop] = Math.floor(baseValue * (1 + item.enhancementLevel * 0.1));
+                }
+                
+                addLog(`${item.name}强化成功！当前等级: ${item.enhancementLevel}`, "text-green-400");
+            } else {
+                // 强化失败
+                addLog(`${item.name}强化失败！`, "text-red-400");
+            }
+            
+            // 关闭弹窗并更新UI
+            dom.enhancementModal.classList.add('hidden');
+            updateEquipmentUI();
+            updatePlayerStats();
+            updateUI();
+        }
+
+        // 打开技能升级弹窗
+        function openSkillUpgradeModal(skillId) {
+            const skill = skills.find(s => s.id === skillId);
+            if (!skill || !skill.unlocked || skill.level >= skill.maxLevel) return;
+            
+            selectedSkill = skillId;
+            
+            // 设置弹窗内容
+            dom.skillUpgradeIcon.className = `${skill.bgColor} w-12 h-12 rounded-lg flex items-center justify-center`;
+            dom.skillUpgradeIcon.innerHTML = `<i class="fa ${skill.icon} ${skill.iconColor} text-xl"></i>`;
+            dom.skillUpgradeName.textContent = skill.name;
+            dom.skillCurrentLevel.textContent = skill.level;
+            dom.skillNextLevel.textContent = skill.level + 1;
+            
+            // 技能效果描述
+            let currentEffect = '';
+            let nextEffect = '';
+            
+            if (skill.damageMultiplier) {
+                currentEffect = `${(skill.damageMultiplier * 100).toFixed(0)}%`;
+                nextEffect = `${((skill.damageMultiplier + 0.1) * 100).toFixed(0)}%`;
+            } else if (skill.agilityBoost) {
+                currentEffect = `${skill.agilityBoost}%`;
+                nextEffect = `${skill.agilityBoost + 5}%`;
+            } else if (skill.defenseBoost) {
+                currentEffect = `${skill.defenseBoost}%`;
+                nextEffect = `${skill.defenseBoost + 5}%`;
+            } else if (skill.healPercentage) {
+                currentEffect = `${skill.healPercentage}%`;
+                nextEffect = `${skill.healPercentage + 5}%`;
+            }
+            
+            dom.skillCurrentEffect.textContent = currentEffect;
+            dom.skillNextEffect.textContent = nextEffect;
+            dom.skillUpgradeStoneCost.textContent = skill.upgradeCost.spiritStones;
+            dom.skillUpgradePointCost.textContent = skill.upgradeCost.skillPoints;
+            
+            dom.skillUpgradeModal.classList.remove('hidden');
+        }
+
+        // 确认技能升级
+        function confirmSkillUpgrade() {
+            if (!selectedSkill) return;
+            
+            const skill = skills.find(s => s.id === selectedSkill);
+            if (!skill || !skill.unlocked || skill.level >= skill.maxLevel) {
+                dom.skillUpgradeModal.classList.add('hidden');
+                return;
+            }
+            
+            // 检查资源是否足够
+            if (gameData.player.spiritStones < skill.upgradeCost.spiritStones) {
+                addLog("灵石不足，无法升级技能！", "text-red-400");
+                return;
+            }
+            
+            if (gameData.player.skillPoints < skill.upgradeCost.skillPoints) {
+                addLog("技能点不足，无法升级技能！", "text-red-400");
+                return;
+            }
+            
+            // 扣除消耗
+            gameData.player.spiritStones -= skill.upgradeCost.spiritStones;
+            gameData.player.skillPoints -= skill.upgradeCost.skillPoints;
+            
+            // 升级技能
+            skill.level += 1;
+            
+            // 提升技能效果
+            if (skill.damageMultiplier) {
+                skill.damageMultiplier += 0.1;
+                if (skill.targets) skill.targets = Math.min(6, skill.targets + (skill.level % 2 === 0 ? 1 : 0));
+            } else if (skill.agilityBoost) {
+                skill.agilityBoost += 5;
+                skill.duration += 0.5;
+            } else if (skill.defenseBoost) {
+                skill.defenseBoost += 5;
+                skill.duration += 0.5;
+            } else if (skill.healPercentage) {
+                skill.healPercentage += 5;
+            }
+            
+            addLog(`${skill.name}升级成功！当前等级: ${skill.level}`, "text-green-400");
+            
+            // 关闭弹窗并更新UI
+            dom.skillUpgradeModal.classList.add('hidden');
+            initSkills(); // 更新技能界面
+            updateUI();
+        }
+
+        // 添加日志
+        function addLog(message, className = "") {
+            // 获取当前时间
+            const now = new Date();
+            const timeStr = `${now.getHours().toString().padStart(2, '0')}:${now.getMinutes().toString().padStart(2, '0')}`;
+            
+            // 创建日志元素
+            const logElement = document.createElement('div');
+            logElement.className = className;
+            logElement.innerHTML = `<span class="text-gray-500">[${timeStr}]</span> ${message}`;
+            
+            // 添加到日志容器
+            dom.battleLog.appendChild(logElement);
+            
+            // 滚动到底部
+            dom.battleLog.scrollTop = dom.battleLog.scrollHeight;
+            
+            // 限制日志数量
+            if (dom.battleLog.children.length > 50) {
+                dom.battleLog.removeChild(dom.battleLog.firstChild);
+            }
+        }
+
+        // 清空日志
+        function clearLog() {
+            dom.battleLog.innerHTML = '<div>日志已清空</div>';
+        }
+
+        // 打开物品详情
+        function openItemDetail(item) {
+            selectedItem = item;
+            
+            // 处理物品稀有度显示
+            let rarityText = '';
+            switch(item.rarity) {
+                case 'common': rarityText = '凡品'; break;
+                case 'uncommon': rarityText = '下品'; break;
+                case 'rare': rarityText = '中品'; break;
+                case 'epic': rarityText = '上品'; break;
+                case 'legendary': rarityText = '极品'; break;
+            }
+            
+            // 设置详情内容
+            dom.itemDetailName.textContent = item.name;
+            dom.itemDetailIcon.className = `${item.bgColor} w-16 h-16 rounded-lg flex items-center justify-center`;
+            dom.itemDetailIcon.innerHTML = `<i class="fa ${item.icon} ${item.iconColor} text-2xl"></i>`;
+            dom.itemDetailRarity.textContent = rarityText;
+            dom.itemDetailRarity.className = `text-xs bg-rarity-${item.rarity}/30 text-rarity-${item.rarity} px-2 py-0.5 rounded-full`;
+            dom.itemDetailCount.textContent = item.count;
+            dom.itemDetailType.textContent = getTypeName(item.type);
+            dom.itemDetailDesc.textContent = item.description;
+            
+            // 设置物品效果
+            dom.itemDetailEffects.innerHTML = '';
+            if (item.effect) {
+                for (const prop in item.effect) {
+                    const effectElement = document.createElement('div');
+                    effectElement.className = 'flex items-center text-rarity-uncommon';
+                    
+                    let propName = '';
+                    let icon = '';
+                    
+                    switch(prop) {
+                        case 'attack': 
+                            propName = '攻击'; 
+                            icon = 'fa-bolt text-red-400';
+                            break;
+                        case 'defense': 
+                            propName = '防御'; 
+                            icon = 'fa-shield text-blue-400';
+                            break;
+                        case 'spirit': 
+                            propName = '灵力'; 
+                            icon = 'fa-magic text-purple-400';
+                            break;
+                        case 'agility': 
+                            propName = '身法'; 
+                            icon = 'fa-wind text-green-400';
+                            break;
+                        case 'hp': 
+                            propName = '生命值'; 
+                            icon = 'fa-heart text-red-400';
+                            break;
+                        case 'cultivation': 
+                            propName = '修为'; 
+                            icon = 'fa-star text-yellow-400';
+                            break;
+                    }
+                    
+                    effectElement.innerHTML = `<i class="fa ${icon} mr-1"></i> ${propName} +${item.effect[prop]}`;
+                    dom.itemDetailEffects.appendChild(effectElement);
+                }
+            }
+            
+            // 设置出售按钮文本
+            dom.sellItemBtn.innerHTML = `出售 (${item.value}灵石)`;
+            
+            // 显示详情弹窗
+            dom.itemDetailModal.classList.remove('hidden');
+        }
+
+        // 使用选中的物品
+        function useSelectedItem() {
+            if (!selectedItem) return;
+            
+            useItem(selectedItem.id);
+            dom.itemDetailModal.classList.add('hidden');
+            selectedItem = null;
+        }
+
+        // 出售选中的物品
+        function sellSelectedItem() {
+            if (!selectedItem) return;
+            
+            sellItem(selectedItem.id);
+            dom.itemDetailModal.classList.add('hidden');
+            selectedItem = null;
+        }
+
+        // 筛选背包物品
+        function filterBackpackItems() {
+            const searchTerm = dom.backpackSearch.value.toLowerCase();
+            const activeCategory = document.querySelector('.backpack-category.text-accent').dataset.category;
+            
+            const filteredItems = gameData.backpack.filter(item => {
+                const matchesSearch = item.name.toLowerCase().includes(searchTerm) || 
+                                     item.description.toLowerCase().includes(searchTerm);
+                const matchesCategory = activeCategory === 'all' || item.type === activeCategory;
+                return matchesSearch && matchesCategory;
+            });
+            
+            // 显示强化石（特殊材料）
+            const showEnhancementStone = activeCategory === 'all' || activeCategory === 'material';
+            const enhancementStoneMatchesSearch = searchTerm === '' || 
+                                                '强化石'.toLowerCase().includes(searchTerm) ||
+                                                '用于强化装备的基础材料。'.toLowerCase().includes(searchTerm);
+            
+            renderFilteredBackpack(filteredItems, showEnhancementStone && enhancementStoneMatchesSearch);
+        }
+
+        // 渲染筛选后的背包物品
+        function renderFilteredBackpack(filteredItems, showEnhancementStone) {
+            dom.backpackContent.innerHTML = '';
+            
+            // 显示强化石（特殊处理）
+            if (showEnhancementStone && gameData.materials.enhancementStone > 0) {
+                const enhancementStone = items.find(i => i.id === 40);
+                const itemElement = createItemElement({...enhancementStone, count: gameData.materials.enhancementStone});
+                dom.backpackContent.appendChild(itemElement);
+            }
+            
+            // 显示筛选后的物品
+            if (filteredItems.length > 0) {
+                filteredItems.forEach(item => {
+                    const itemElement = createItemElement(item);
+                    dom.backpackContent.appendChild(itemElement);
+                });
+            } else if (!showEnhancementStone || gameData.materials.enhancementStone === 0) {
+                // 显示空状态
+                dom.backpackContent.innerHTML = `
+                    <div class="text-gray-500 flex flex-col items-center justify-center p-6 border border-dashed border-gray-700 rounded-lg col-span-full">
+                        <i class="fa fa-inbox text-3xl mb-2"></i>
+                        <span>没有找到符合条件的物品</span>
+                    </div>
+                `;
+            }
+        }
+
+        // 创建物品元素
+        function createItemElement(item) {
+            const itemElement = document.createElement('div');
+            itemElement.className = 'bg-gray-800 rounded-lg p-3 border border-gray-700 hover:border-primary/50 transition-colors cursor-pointer item-card';
+            itemElement.dataset.id = item.id;
+            
+            // 处理物品稀有度显示
+            let rarityText = '';
+            switch(item.rarity) {
+                case 'common': rarityText = '凡品'; break;
+                case 'uncommon': rarityText = '下品'; break;
+                case 'rare': rarityText = '中品'; break;
+                case 'epic': rarityText = '上品'; break;
+                case 'legendary': rarityText = '极品'; break;
+            }
+            
+            // 处理物品效果显示
+            let effectText = '';
+            if (item.effect) {
+                const effects = [];
+                if (item.effect.attack) effects.push(`攻+${item.effect.attack}`);
+                if (item.effect.defense) effects.push(`防+${item.effect.defense}`);
+                if (item.effect.spirit) effects.push(`灵+${item.effect.spirit}`);
+                if (item.effect.agility) effects.push(`身+${item.effect.agility}`);
+                if (item.effect.hp) effects.push(`血+${item.effect.hp}`);
+                if (item.effect.cultivation) effects.push(`修+${item.effect.cultivation}`);
+                effectText = effects.join(' ');
+            }
+            
+            itemElement.innerHTML = `
+                <div class="${item.bgColor} w-12 h-12 rounded-lg flex items-center justify-center mb-2">
+                    <i class="fa ${item.icon} ${item.iconColor} text-xl"></i>
+                </div>
+                <h4 class="font-medium text-sm truncate">${item.name}</h4>
+                <div class="flex justify-between items-center mt-1">
+                    <span class="text-xs bg-rarity-${item.rarity}/30 text-rarity-${item.rarity} px-1.5 py-0.5 rounded">${rarityText}</span>
+                    <span class="text-xs text-gray-400">x${item.count}</span>
+                </div>
+                ${effectText ? `<div class="text-xs text-gray-400 mt-1">${effectText}</div>` : ''}
+            `;
+            
+            // 添加点击事件
+            itemElement.addEventListener('click', () => openItemDetail(item));
+            
+            return itemElement;
+        }
+
+        // 筛选商店物品
+        function filterShopItems(category) {
+            const items = document.querySelectorAll('.shop-item');
+            items.forEach(item => {
+                if (category === 'all' || item.classList.contains(category)) {
+                    item.style.display = 'flex';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // 筛选技能
+        function filterSkills(filter) {
+            const skills = document.querySelectorAll('.skill-item');
+            skills.forEach(skill => {
+                const skillId = skill.dataset.id;
+                const skillData = skills.find(s => s.id === skillId);
+                
+                if (filter === 'all' || 
+                    (filter === 'unlocked' && skillData.unlocked) || 
+                    (filter === 'locked' && !skillData.unlocked)) {
+                    skill.style.display = 'block';
+                } else {
+                    skill.style.display = 'none';
+                }
+            });
+        }
+
+        // 切换音效
+        function toggleSound() {
+            gameData.soundEnabled = !gameData.soundEnabled;
+            const icon = dom.soundToggle.querySelector('i');
+            
+            if (gameData.soundEnabled) {
+                icon.className = 'fa fa-volume-up text-gray-300';
+                addLog("开启音效", "text-gray-400");
+            } else {
+                icon.className = 'fa fa-volume-off text-gray-300';
+                addLog("关闭音效", "text-gray-400");
+            }
+        }
+
+        // 获取类型名称
+        function getTypeName(type) {
+            const typeMap = {
+                'potion': '丹药',
+                'material': '材料',
+                'weapon': '武器',
+                'armor': '防具',
+                'accessory': '饰品',
+                'skill': '秘籍'
+            };
+            return typeMap[type] || type;
+        }
+
+        // 更新背包UI
+        function updateBackpackUI() {
+            const totalItems = getTotalItemsInBackpack();
+            dom.backpackCount.textContent = `${totalItems}/${gameData.backpackCapacity}`;
+            dom.backpackCapacity.textContent = `${totalItems}/${gameData.backpackCapacity}`;
+            
+            // 默认显示所有物品
+            filterBackpackItems();
+        }
+
+        // 更新装备UI
+        function updateEquipmentUI() {
+            // 更新装备槽显示
+            for (const slot in gameData.equipment) {
+                const item = gameData.equipment[slot];
+                const slotElement = document.getElementById(`${slot}-slot`);
+                const unequipBtn = document.querySelector(`.equip-unequip-btn[data-slot="${slot}"]`);
+                const enhanceBtn = document.querySelector(`.enhance-equipment-btn[data-slot="${slot}"]`);
+                
+                if (item) {
+                    // 有装备
+                    slotElement.innerHTML = `
+                        <div class="${item.bgColor} w-10 h-10 rounded-lg flex items-center justify-center mr-3">
+                            <i class="fa ${item.icon} ${item.iconColor}"></i>
+                        </div>
+                        <div class="text-left">
+                            <div class="font-medium">${item.name}</div>
+                            <div class="text-xs text-gray-400">
+                                ${item.enhancementLevel > 0 ? `+${item.enhancementLevel} ` : ''}
+                                ${getItemEffectsText(item)}
+                            </div>
+                        </div>
+                    `;
+                    slotElement.className = 'h-24 border border-primary/30 rounded-lg flex items-center px-2';
+                    
+                    // 显示操作按钮
+                    unequipBtn.classList.remove('hidden');
+                    enhanceBtn.classList.remove('hidden');
+                } else {
+                    // 无装备
+                    let icon = '';
+                    let text = '';
+                    
+                    switch(slot) {
+                        case 'weapon': 
+                            icon = 'fa-sword'; 
+                            text = '未装备';
+                            break;
+                        case 'armor': 
+                            icon = 'fa-shield'; 
+                            text = '未装备';
+                            break;
+                        case 'accessory': 
+                            icon = 'fa-gem'; 
+                            text = '未装备';
+                            break;
+                        case 'treasure': 
+                            icon = 'fa-magic'; 
+                            text = gameData.player.realm.includes('筑基') ? '可装备' : '未解锁';
+                            break;
+                    }
+                    
+                    slotElement.innerHTML = `<i class="fa ${icon} text-3xl mr-2"></i><span>${text}</span>`;
+                    slotElement.className = 'h-24 border-2 border-dashed border-gray-700 rounded-lg flex items-center justify-center text-gray-500';
+                    
+                    // 隐藏操作按钮
+                    if (unequipBtn) unequipBtn.classList.add('hidden');
+                    if (enhanceBtn) enhanceBtn.classList.add('hidden');
+                }
+            }
+            
+            // 更新装备属性总和
+            updateEquipmentStats();
+        }
+
+        // 获取物品效果文本
+        function getItemEffectsText(item) {
+            if (!item.effect) return '';
+            
+            const effects = [];
+            if (item.effect.attack) effects.push(`攻+${item.effect.attack}`);
+            if (item.effect.defense) effects.push(`防+${item.effect.defense}`);
+            if (item.effect.spirit) effects.push(`灵+${item.effect.spirit}`);
+            if (item.effect.agility) effects.push(`身+${item.effect.agility}`);
+            if (item.effect.hp) effects.push(`血+${item.effect.hp}`);
+            
+            return effects.join(' ');
+        }
+
+        // 更新装备属性总和
+        function updateEquipmentStats() {
+            let totalAttack = 0;
+            let totalDefense = 0;
+            let totalSpirit = 0;
+            let totalAgility = 0;
+            
+            // 计算所有装备的属性总和
+            for (const slot in gameData.equipment) {
+                const item = gameData.equipment[slot];
+                if (item && item.effect) {
+                    if (item.effect.attack) totalAttack += item.effect.attack;
+                    if (item.effect.defense) totalDefense += item.effect.defense;
+                    if (item.effect.spirit) totalSpirit += item.effect.spirit;
+                    if (item.effect.agility) totalAgility += item.effect.agility;
+                }
+            }
+            
+            // 更新显示
+            dom.totalAttack.textContent = totalAttack;
+            dom.totalDefense.textContent = totalDefense;
+            dom.totalSpirit.textContent = totalSpirit;
+            dom.totalAgility.textContent = totalAgility;
+            
+            // 更新装备强化区域
+            updateEnhancementArea();
+        }
+
+        // 更新装备强化区域
+        function updateEnhancementArea() {
+            // 检查是否有已装备的物品
+            let hasEquipment = false;
+            for (const slot in gameData.equipment) {
+                if (gameData.equipment[slot]) {
+                    hasEquipment = true;
+                    break;
+                }
+            }
+            
+            if (hasEquipment) {
+                dom.enhancementArea.innerHTML = `
+                    <div class="text-sm">
+                        <p>装备强化可以提升装备属性，每次强化需要消耗灵石和强化石。</p>
+                        <p class="mt-1">强化有一定成功率，失败不会降级，但会消耗材料。</p>
+                        <p class="mt-1 text-accent">强化等级越高，属性提升越多，消耗也越大。</p>
+                    </div>
+                `;
+            } else {
+                dom.enhancementArea.innerHTML = `选择一件已装备的物品进行强化`;
+            }
+        }
+
+        // 更新玩家属性
+        function updatePlayerStats() {
+            // 计算装备加成
+            let equipAttack = 0;
+            let equipDefense = 0;
+            let equipSpirit = 0;
+            let equipAgility = 0;
+            
+            for (const slot in gameData.equipment) {
+                const item = gameData.equipment[slot];
+                if (item && item.effect) {
+                    equipAttack += item.effect.attack || 0;
+                    equipDefense += item.effect.defense || 0;
+                    equipSpirit += item.effect.spirit || 0;
+                    equipAgility += item.effect.agility || 0;
+                }
+            }
+            
+            // 更新显示（基础属性 + 装备加成）
+            dom.attack.textContent = gameData.player.attack + equipAttack;
+            dom.defense.textContent = gameData.player.defense + equipDefense;
+            dom.spirit.textContent = gameData.player.spirit + equipSpirit;
+            dom.agility.textContent = gameData.player.agility + equipAgility;
+        }
+
+        // 更新UI
+        function updateUI() {
+            // 更新玩家基本信息
+            dom.playerName.textContent = gameData.player.name;
+            dom.playerLevel.textContent = gameData.player.level;
+            dom.playerRealm.textContent = gameData.player.realm;
+            
+            // 更新修为进度
+            const cultivationPercent = Math.min(100, (gameData.player.cultivation / gameData.player.maxCultivation) * 100);
+            dom.cultivationProgress.style.width = `${cultivationPercent}%`;
+            dom.cultivationProgressText.textContent = `${gameData.player.cultivation}/${gameData.player.maxCultivation}`;
+            
+            // 更新生命值
+            const hpPercent = (gameData.player.hp / gameData.player.maxHp) * 100;
+            dom.hpProgress.style.width = `${hpPercent}%`;
+            dom.hpProgress.className = `h-full ${hpPercent > 50 ? 'bg-green-500' : hpPercent > 20 ? 'bg-yellow-500' : 'bg-red-500'}`;
+            dom.hpText.textContent = `${gameData.player.hp}/${gameData.player.maxHp}`;
+            
+            // 更新灵石数量
+            dom.spiritStones.textContent = gameData.player.spiritStones;
+            
+            // 更新属性（包含装备加成）
+            updatePlayerStats();
+            
+            // 更新背包
+            updateBackpackUI();
+            
+            // 更新装备
+            updateEquipmentUI();
+        }
+
+        // 工具函数：获取随机整数
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min + 1)) + min;
+        }
+
+        // 启动游戏
+        initGame();
+    </script>
+</body>
+</html>
